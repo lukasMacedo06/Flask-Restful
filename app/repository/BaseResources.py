@@ -58,7 +58,7 @@ class BaseResources():
             if query is None:
                 return {'response':'empty search', 'status':404}
             
-            db.session.delete(me)
+            db.session.delete(query)
             db.session.commit()
             return {'response':'deleted successfully', 'status':200}
         except Exception as e:
