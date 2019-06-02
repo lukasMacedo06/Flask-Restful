@@ -1,6 +1,6 @@
 from app.models import db
 
-class BaseResources():
+class BaseResources(object):
 
     def __init__(self, model):
         self.model = model
