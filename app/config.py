@@ -1,5 +1,6 @@
 import os
-
+from flask.json import jsonify
+from exceptions import NotFoundError
 
 class BaseConfig(object):
     DEBUG = False
@@ -29,3 +30,8 @@ config = {
 def configure_app(app):
     config_name = os.getenv('FLASK_CONFIGURATION', 'dev')
     app.config.from_object(config[config_name])
+
+def exception_handling(app):
+    @app.errorhandler(404)
+    def route_not_found(error):
+        return jsonify(NotFoundError('Route not found').to_dict()), error.code
